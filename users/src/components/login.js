@@ -1,7 +1,8 @@
 import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import './../App.css'  
 const Login = () => {
+
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
     const [success,setSuccess] = useState('')
@@ -39,7 +40,7 @@ const Login = () => {
     }
   return (
     <>
-      <div className="login bg-container container" 
+      <div className="login" 
         style={localStorage.user==='admin' ?{display:'none'}:{display:'block'}}>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
