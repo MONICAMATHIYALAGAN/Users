@@ -12,7 +12,7 @@ const UpdateUser = () => {
                 setDetails(res.data)
             }
         }
-    )}, [])
+    )}, [id])
 
     const updateUser = async () => {
         let res = await axios.put(`http://localhost:4000/resource/${id}`, details) ;

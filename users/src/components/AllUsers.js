@@ -15,12 +15,10 @@ const AllUsers = () => {
         )
     }, [])
 
-    const updateUser = (id) => {
-        navigate(`/updateUser/${id}`)
-    }
+   
 
-    const deleteUser = (id) => {
-        navigate(`/deleteUser/${id}`)
+    const getDetails = (id) => {
+        navigate(`/details/${id}`)
     }
 
     let value = <>
@@ -28,22 +26,24 @@ const AllUsers = () => {
         <thead>
             <tr>
             <th>Name</th>
-            <th>Email</th>
+            {/* <th>Email</th>
             <th>Number</th>
             <th>Gender</th>
             <th>UpdateUser</th>
-            <th>DeleteUser</th>
+            <th>DeleteUser</th> */}
+            <th>Get Details</th>
             </tr>
         </thead>
         <tbody>
             {users.map((user, key) => {
                return (<tr key={user.id}>
                     <td>{user.name}</td>
-                    <td>{user.email}</td>
+                    <td><button onClick={() => getDetails(user.id)}>Get Details</button></td>
+                    {/* <td>{user.email}</td>
                     <td>{user.mobileNumber}</td>
                     <td>{user.gender}</td>
                     <td ><button onClick={() => updateUser(user.id)}>Update</button></td>
-                    <td><button onClick={() => deleteUser(user.id)}>Delete</button></td>
+                    <td><button onClick={() => deleteUser(user.id)}>Delete</button></td> */}
                </tr>)
             })}
         </tbody>

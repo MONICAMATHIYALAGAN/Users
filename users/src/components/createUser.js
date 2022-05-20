@@ -7,7 +7,7 @@ const CreateUser = () => {
     const[email, setEmail] = useState('');
     const[mobileNumber, setMobileNumber] = useState(0);
     const[gender, setGender] = useState('');
-    let id=1;
+    let id=36;
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -15,6 +15,10 @@ const CreateUser = () => {
       let res =  await axios.post('http://localhost:4000/resource', payload)
       if(res.status === 201) {
         alert('User created successfully')
+        setEmail('')
+        setName('')
+        setMobileNumber('')
+        setGender('')
       } else {
         alert('something went wrong please try again later')
       }
