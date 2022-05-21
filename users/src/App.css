@@ -1,16 +1,26 @@
+*{
+  background: url('/src/dist/background.jpg') no-repeat center fixed;     
+  background-size: cover;
+  background-blend-mode: color-burn;
+  z-index: -1;
+  
+} 
+.pgpg {
+  text-align: center;
+  color: whitesmoke;
+  font-style: italic;
+}
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logout{
+    float: right;
+    margin: 30px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login {
+  top: 120px;
+  position: fixed;
+  left: 400px;
 }
 
 .App-header {

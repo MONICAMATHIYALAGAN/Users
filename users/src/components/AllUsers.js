@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
+import "bootstrap/dist/css/bootstrap.min.css";
+import Login from "./login";
+
 const AllUsers = () => {
     const [users, SetUsers] = useState([])
     let navigate = useNavigate();
     useEffect(() => {
-        axios.get('http://localhost:4000/resource').then(
+        axios.get('https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource').then(
             (res) => {
                 if(res.status === 200) {
                     SetUsers(res.data)
@@ -22,35 +25,31 @@ const AllUsers = () => {
 
     let value = <>
      <nav>
-      <Link to={'/createUser'}>CreateUser</Link>
-      <Link to={'/users'}>Get All Users</Link>
+      <button className="btn btn-primary"><Link to={'/createUser'}>CreateUser</Link></button>
+      {/* <Link to={'/users'}>Get All Users</Link> */}
     </nav>
-    <table className="table">
-        <thead>
-            <tr>
-            <th>Name</th>
-            {/* <th>Email</th>
-            <th>Number</th>
-            <th>Gender</th>
-            <th>UpdateUser</th>
-            <th>DeleteUser</th> */}
-            <th>Get Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            {users.map((user, key) => {
-               return (<tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td><button onClick={() => getDetails(user.id)}>Get Details</button></td>
-                    {/* <td>{user.email}</td>
-                    <td>{user.mobileNumber}</td>
-                    <td>{user.gender}</td>
-                    <td ><button onClick={() => updateUser(user.id)}>Update</button></td>
-                    <td><button onClick={() => deleteUser(user.id)}>Delete</button></td> */}
-               </tr>)
-            })}
-        </tbody>
-    </table>
+    {localStorage.user==='admin' ?<div>
+        <Login ></Login>
+        <table className="table" style={{color:"white"}}>
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Get Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {users.map((user, key) => {
+                return (<tr key={user.id}>
+                        <td>{user.name}</td>
+                        <td><button className="btn btn-primary" onClick={() => getDetails(user.id)}>Get Details</button></td>
+                </tr>)
+                })}
+            </tbody>
+        </table>
+    </div>:<div><h1 >login first to  view this page</h1>
+            <button type="button" className="btn btn-primary" onClick={this.loginHandler}>Go to Login Page</button>
+                </div>
+            }
     </>
 
     return value

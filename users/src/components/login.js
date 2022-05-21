@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import { useNavigate} from 'react-router-dom';
-import './../App.css'  
+import './../App.css'
+
 const Login = () => {
 
     const [username,setUsername] = useState('')
@@ -40,13 +41,16 @@ const Login = () => {
     }
   return (
     <>
+      <h1 className='pgpg'>
+          HI WELCOME
+      </h1>
       <div className="login" 
         style={localStorage.user==='admin' ?{display:'none'}:{display:'block'}}>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name" style={{color:"black"}}>Username:</label>
+            <label htmlFor="name" style={{color:"white"}}>USERNAME :</label>
             <input
-              style={{ width: "40%" }}
+              style={{ width: "150%" }}
               type="text"
               id="name"
               value={username}
@@ -56,9 +60,9 @@ const Login = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="pwd" style={{color:"black"}}>Password:</label>
+            <label htmlFor="pwd" style={{color:"white"}}>PASSWORD :</label>
             <input
-              style={{ width: "40%" }}
+              style={{ width: "150%" }}
               type="password"
               id="pwd"
               value={password}
