@@ -1,42 +1,53 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 
 const UpdateUser = () => {
-    let id = useParams().id
-    let [details, setDetails] = useState({})
-    let [data, setData] = useState(details)
+    const{id}  = useParams();
+    let navigate = useNavigate()
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [gender, setGender] = useState("");
     useEffect(()=>{ axios.get(`http://localhost:4000/resource/${id}`).then (
         (res) => {
             if(res.status === 200) {
-                setDetails(res.data)
+                setName(res.data.name)
+                setEmail(res.data.email)
+                setMobileNumber(res.data.mobileNumber)
+                setGender(res.data.gender)
             }
         }
     )}, [id])
 
     const updateUser = async () => {
-        let res = await axios.put(`http://localhost:4000/resource/${id}`, details) ;
-        console.log(res)
+        const payload = {
+            name: name,
+            email: email,
+            mobileNumber: mobileNumber,
+            gender: gender,
+          };
+        let res = await axios.put(`http://localhost:4000/resource/${id}`, payload) ;
+        if(res.status === 200) {
+            alert("user details updated successfully")
+            navigate(`/details/${id}`)
+        }
     }
 
     let dataForm = <>
-    {details && <div>
+    <div>
     <form>
         <label>name</label>
-        <input type={'text'} defaultValue={details.name} onChange = {(e) => {setDetails({name: e.target.value})
-        console.log((e.target.value))} } />
+        <input name="name" id="name" type={'text'} value={name} onChange = {(e) => {setName(e.target.value)}} />
         <label>email</label>
-        <input type={'text'} defaultValue={details.email} onChange = {(e) => {setDetails({email: e.target.value})
-        console.log((e.target.value))} } />
+        <input name="email" id="email" type={'text'} value={email}  onChange = {(e) => {setEmail(e.target.value)} } />
         <label>gender</label>
-        <input type={'text'} defaultValue={details.gender} onChange = {(e) => {setDetails({gender: e.target.value})
-        console.log((e.target.value))} } /> <br />
+        <input name="gender" id="gender" type={'text'} value={gender}  onChange = {(e) => {setGender(e.target.value)} } /> <br />
         <label>mobileNumber</label>
-        <input type={'text'} defaultValue={details.mobileNumber} onChange = {(e) => {setDetails({mobileNumber: e.target.value})
-        console.log((e.target.value))} } />
+        <input name="mobileNumber" id="mobileNumber" type={'text'} value={mobileNumber}  onChange = {(e) => {setMobileNumber(e.target.value)} } />
     </form>
     <button onClick={updateUser}>Update</button>
-     </div>}
+     </div>
     </>
 
     return dataForm

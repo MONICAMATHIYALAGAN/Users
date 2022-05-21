@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const AllUsers = () => {
     const [users, SetUsers] = useState([])
     let navigate = useNavigate();
@@ -8,8 +8,7 @@ const AllUsers = () => {
         axios.get('http://localhost:4000/resource').then(
             (res) => {
                 if(res.status === 200) {
-                    SetUsers(res.data) 
-                    console.log('response', res)
+                    SetUsers(res.data)
                 }
             }
         )
@@ -22,6 +21,10 @@ const AllUsers = () => {
     }
 
     let value = <>
+     <nav>
+      <Link to={'/createUser'}>CreateUser</Link>
+      <Link to={'/users'}>Get All Users</Link>
+    </nav>
     <table className="table">
         <thead>
             <tr>

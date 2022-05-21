@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './components/login';
 import CreateUser from './components/createUser';
 import AllUsers from './components/AllUsers';
@@ -10,11 +10,6 @@ import UpdateUser from './components/UpdateUser';
 function App() {
   return (
     <BrowserRouter>
-    <nav>
-      <Link to={'/createUser'}>CreateUser</Link>
-      <Link to={'/users'}>Get All Users</Link>
-      <Link to={'/details/:id'}>Details</Link>
-    </nav>
     <Routes>
       <Route path="/"  element={<Login />} />
       <Route path="/createUser"  element={<CreateUser />} />

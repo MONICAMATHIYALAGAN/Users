@@ -12,7 +12,6 @@ const GetDetails = () =>
             (res) => {
                 if(res.status === 200) {
                     setDetails(res.data) 
-                    console.log('in details page', res)
                 }
             }
         )
@@ -26,7 +25,7 @@ const GetDetails = () =>
         let data = await axios.delete(`http://localhost:4000/resource/${id}`)
         if(data.status === 200 ){
             alert('deleted successfully')
-            navigate('/createUser')
+            navigate('/users')
         } else {
             alert('something went wrong')
         }
