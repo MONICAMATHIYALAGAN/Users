@@ -12,7 +12,6 @@ const CreateUser = () => {
     const[gender, setGender] = useState('');
     const [nameErr,setNameErr] = useState({})
     const [emailErr,setEmailErr] = useState({})
-    const [mobileNumberErr,setMobileNumberErr] = useState({})
     const [genderErr,setGenderErr] = useState({})
 
     const handleSubmit = async (e) => {
@@ -21,9 +20,10 @@ const CreateUser = () => {
       if(isValid) {
           const payload = { 'name' : name, 'email' : email, 'mobileNumber': mobileNumber, 'gender': gender }
           console.log('payload', payload);
-        axios.post('https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource', payload)
-        .then(res => { 
-            if(res.status === 200) {
+        axios.post('https://cors-anywhere.herokuapp.com/https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource', payload)
+        .then(res => {
+          console.log('res is', res);
+            if(res.status === 201) {
               alert('User created successfully')
               setEmail('')
               setName('')
@@ -42,7 +42,6 @@ const CreateUser = () => {
     const formValidation = () => {
       const nameErr = {};
       const emailErr = {};
-      const mobileNumberErr = {};
       const genderErr = {};
       let isValid = true;
 
@@ -54,25 +53,12 @@ const CreateUser = () => {
         emailErr.emailEmpty = 'Please Enter your Email';
         isValid = false;
       }
-      if(!mobileNumber) {
-        mobileNumber.mobileNumberEmpty = 'Please Enter your Mobile Number';
-        isValid = false;
-      }
-      if(mobileNumber.length < 10) {
-        mobileNumber.mobileNumberEmpty = 'Mobile Number should be 10 digit';
-        isValid = false;
-      }
-      if(mobileNumber.length > 10) {
-        mobileNumber.mobileNumberEmpty = 'Mobile Number should be 10 digit ';
-        isValid = false;
-      }
       if(!gender) {
         genderErr.genderEmpty = 'Please select Gender';
         isValid = false;
       }
       setNameErr(nameErr);
       setEmailErr(emailErr);
-      setMobileNumberErr(mobileNumberErr);
       setGenderErr(genderErr);
 
       return isValid;
@@ -130,9 +116,6 @@ const CreateUser = () => {
               className="form-control"
               placeholder="Enter your Mobile Number"
             />
-            {Object.keys(mobileNumberErr).map((key) => {
-              return <div style= {{color: "red"}}>{mobileNumberErr[key]}</div>
-            })}
         </div>
         <div className="form-group">
             <label htmlFor="gender" style={{color:"white"}}>Gender:</label>
