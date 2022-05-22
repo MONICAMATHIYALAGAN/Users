@@ -4,15 +4,17 @@ import { useParams } from "react-router-dom";
 import Login from "./login";
 
 const DeleteUser = () => {
-    const _id = useParams()._id
+    let _id = useParams();
+    _id = Object.values(_id);
     const [message, setMessage] = useState('')
-    useEffect(() => { axios.delete(`https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource/${_id}`).then (
+    // Load the data initial on the page
+    useEffect(() => { axios.delete(`https://crudcrud.com/api/f78bc976b8e54ee3819da2550a1a8a69/resource/${_id}`).then (
         (res) => {
             if( res.status === 200) {
                 setMessage('User deleted Successfully')
             } 
         }
-)})
+)}, [])
 
     return <>
     {localStorage.user==='admin' ?<div>

@@ -7,26 +7,28 @@ import Login from "./login";
 
 const GetDetails = () =>
 {
-    const _id = useParams()._id;
+    let _id = useParams();
     let navigate = useNavigate();
     const [details, setDetails] = useState({})
+    _id = Object.values(_id);
+    // Load the data initially on the page
     useEffect(() => {
-        axios.get(`https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource/${_id}`).then(
+        axios.get(`https://crudcrud.com/api/f78bc976b8e54ee3819da2550a1a8a69/resource/${_id}`).then(
             (res) => {
-                console.log('res', res);
                 if(res.status === 200) {
                     setDetails(res.data) 
                 }
             }
         )
-    }, [_id])
+    }, [])
 
+    //  navigate to update page
     const updateUser = (_id) => {
         navigate(`/updateUser/${_id}`)
     }
 
     const deleteUser = async (_id) => {
-        let data = await axios.delete(`http://localhost:4000/resource/${_id}`)
+        let data = await axios.delete(`https://crudcrud.com/api/f78bc976b8e54ee3819da2550a1a8a69/resource/${_id}`)
         if(data.status === 200 ){
             alert('deleted successfully')
             navigate('/users')

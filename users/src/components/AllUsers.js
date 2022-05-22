@@ -7,8 +7,9 @@ import Login from "./login";
 const AllUsers = () => {
     const [users, SetUsers] = useState([])
     let navigate = useNavigate();
+    // load the data initial on the UI page
     useEffect(() => {
-        axios.get('https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource').then(
+        axios.get('https://crudcrud.com/api/f78bc976b8e54ee3819da2550a1a8a69/resource').then(
             (res) => {
                 if(res.status === 200) {
                     SetUsers(res.data)
@@ -18,15 +19,14 @@ const AllUsers = () => {
     }, [])
 
    
-
-    const getDetails = (id) => {
-        navigate(`/details/${id}`)
+// navigation to details page
+    const getDetails = (_id) => {
+        navigate(`/details/${_id}`)
     }
 
     let value = <>
      <nav>
       <button className="btn btn-primary"><Link to={'/createUser'}>CreateUser</Link></button>
-      {/* <Link to={'/users'}>Get All Users</Link> */}
     </nav>
     {localStorage.user==='admin' ?<div>
         <Login ></Login>
@@ -39,9 +39,9 @@ const AllUsers = () => {
             </thead>
             <tbody>
                 {users.map((user, key) => {
-                return (<tr key={user.id}>
+                return (<tr key={user._id}>
                         <td>{user.name}</td>
-                        <td><button className="btn btn-primary" onClick={() => getDetails(user.id)}>Get Details</button></td>
+                        <td><button className="btn btn-primary" onClick={() => getDetails(user._id)}>Get Details</button></td>
                 </tr>)
                 })}
             </tbody>

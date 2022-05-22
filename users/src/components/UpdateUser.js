@@ -5,13 +5,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./login";
 
 const UpdateUser = () => {
-    const{_id}  = useParams();
+    let _id = useParams();
     let navigate = useNavigate()
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [mobileNumber, setMobileNumber] = useState('');
     const [gender, setGender] = useState("");
-    useEffect(()=>{ axios.get(`http://localhost:4000/resource/${_id}`).then (
+    _id = Object.values(_id);
+    //  To load the data on the update page
+    useEffect(()=>{ axios.get(`https://crudcrud.com/api/f78bc976b8e54ee3819da2550a1a8a69/resource/${_id}`).then (
         (res) => {
             if(res.status === 200) {
                 setName(res.data.name)
@@ -29,7 +31,7 @@ const UpdateUser = () => {
             mobileNumber: mobileNumber,
             gender: gender,
           };
-        let res = await axios.put(`https://crudcrud.com/api/b25dc4d466e64846b4744dac54f47a3d/resource/${_id}`, payload) ;
+        let res = await axios.put(`https://crudcrud.com/api/f78bc976b8e54ee3819da2550a1a8a69/resource/${_id}`, payload) ;
         if(res.status === 200) {
             alert("user details updated successfully")
             navigate(`/details/${_id}`)
